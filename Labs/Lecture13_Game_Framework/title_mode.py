@@ -5,21 +5,13 @@ import play_mode
 
 def init():
     global image
-    global running
-    global logo_start_time
-
-    running = True
     image = load_image('title.png')
-    logo_start_time = get_time()
     pass
 
 def finish():
     pass
 
 def update():
-    global running
-    if get_time() - logo_start_time >= 2.0:
-        game_framework.quit()
     pass
 
 def draw():
