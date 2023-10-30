@@ -47,17 +47,3 @@ def draw():
     clear_canvas()
     game_world.render()
     update_canvas()
-
-
-open_canvas()
-init()
-# game loop
-while running:
-    handle_events()
-    update()
-    draw()
-    delay(0.01)
-
-finish()
-# finalization code
-close_canvas()
