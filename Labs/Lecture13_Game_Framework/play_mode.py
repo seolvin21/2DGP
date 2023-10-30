@@ -21,7 +21,7 @@ def handle_events():
             boy.handle_event(event)
 
 
-def create_world():
+def init():
     global running
     global grass
     global team
@@ -35,16 +35,29 @@ def create_world():
     boy = Boy()
     game_world.add_object(boy, 1)
 
+def finish():
+    pass
 
-open_canvas()
-create_world()
-# game loop
-while running:
-    handle_events()
+
+def update():
     game_world.update()
+
+
+def draw():
     clear_canvas()
     game_world.render()
     update_canvas()
+
+
+open_canvas()
+init()
+# game loop
+while running:
+    handle_events()
+    update()
+    draw()
     delay(0.01)
+
+finish()
 # finalization code
 close_canvas()
