@@ -1,16 +1,16 @@
 import pico2d
 from pico2d import delay, close_canvas, open_canvas
-import play_mode
+import logo_mode
 
 open_canvas()
-play_mode.init()
+logo_mode.init()
 # game loop
-while play_mode.running:
-    play_mode.handle_events()
-    play_mode.update()
-    play_mode.draw()
+while logo_mode.running:
+    logo_mode.handle_events()
+    logo_mode.update()
+    logo_mode.draw()
     delay(0.01)
 
-play_mode.finish()
+logo_mode.finish()
 # finalization code
 close_canvas()
