@@ -34,6 +34,10 @@ def init():
     game_world.add_object(boy, 1)
 
     # fill here
+    # 볼을 50개 바닥에
+    global balls
+    balls = [Ball(random.randint(0,1600), 60, 0) for _ in range(50)]
+    game_world.add_objects(balls, 1)
 
 
 
