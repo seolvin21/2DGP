@@ -1,5 +1,5 @@
-from pico2d import load_image, clear_canvas, update_canvas, get_events, get_time,  SDL_KEYDOWN, SDLK_SPACE, SDL_QUIT
 import pico2d
+from pico2d import load_image, clear_canvas, update_canvas, get_events, get_time,  SDL_KEYDOWN, SDL_QUIT
 import game_framework
 import game_world
 import play_mode
@@ -10,11 +10,11 @@ def init():
     global pannel
     pannel = Pannel()
     game_world.add_object(pannel, 3)
-    pass
+
 
 def finish():
     game_world.remove_object(pannel)
-    pass
+
 
 def update():
     game_world.update()
@@ -24,6 +24,7 @@ def draw():
     clear_canvas()
     game_world.render()
     update_canvas()
+
 
 def handle_events():
     events = get_events()
@@ -43,4 +44,3 @@ def handle_events():
                 case pico2d.SDLK_2:
                     play_mode.boy.item = 'BigBall'
                     game_framework.pop_mode()
-    pass
