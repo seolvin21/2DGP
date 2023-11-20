@@ -23,7 +23,7 @@ def handle_events():
 
 
 def init():
-    global boy
+    global boy, ball
 
     ground = Ground()
     game_world.add_object(ground, 0)
