@@ -122,6 +122,23 @@ class Zombie:
         self.loc_no = (self.loc_no + 1) % len(self.patrol_locations)
         return BehaviorTree.SUCCESS
 
+    def run_slightly_away(self, tx, ty):
+        self.dir = math.atan2(self.y-ty, self.x-tx)
+        self.speed = RUN_SPEED_PPS
+        self.x += self.speed * math.cos(self.dir) * game_framework.frame_time
+        self.y += self.speed * math.sin(self.dir) * game_framework.frame_time
+
+    def run_away_from_boy(self):
+        self.state = 'Walk'
+        self.run_slightly_away(play_mode.boy.x, play_mode.boy.y)
+        return BehaviorTree.RUNNING
+
+    def is_weak(self):
+        if self.ball_count < play_mode.boy.ball_count:
+            return BehaviorTree.SUCCESS
+        else:
+            return BehaviorTree.FAIL
+
     def build_behavior_tree(self):
         a1 = Action('Set target location', self.set_target_location, 500, 50)
         a2 = Action('Move to', self.move_to)
@@ -138,5 +155,10 @@ class Zombie:
         SEQ_patrol = Sequence('순찰', a5, a2)
 
         root = SEL_chase_or_flee = Selector('추적 또는 배회', SEQ_chase_boy, SEQ_wander)
+
+        c2 = Condition('좀비가 약한가?', self.is_weak)
+        a6 = Action('소년으로부터 멀어지기', self.run_away_from_boy)
+
+        root = Sequence('top', c2, a6)
 
         self.bt = BehaviorTree(root)
